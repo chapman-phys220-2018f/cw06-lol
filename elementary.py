@@ -93,3 +93,8 @@ class Proton(ChargedParticle):
                     def __init__(self, charge, mass):
                         self.m = sc.constants.m_p
                         self.charge = charge
+
+
+
+
+
