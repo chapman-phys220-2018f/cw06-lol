@@ -27,16 +27,14 @@ class Particle(object):
         r : position in units of [meters]
 
         Scopatz, Anthony; Huff, Kathryn D.. Effective Computation in Physics: Field Guide to Research with Python """
-    
-    
- 
-    def __init__(self, x , y , z):
+
+    def __init__(self,x,y,z):
         """Initializes the particle with supplied values for mass m, momentum p and position r."""
-        
+
         self.m = 1.0
-        self.r = (x, y, z)
+        self.r = (x,y,z)
         self.p = (0.0,0.0,0.0)
-        
+
  
     def impulse(self, px, py, pz):
         """ "takes three floats as increments for an impulse that changes the
@@ -46,55 +44,48 @@ class Particle(object):
             expexted to get impulse with units of Ns = J (Jules)
         """
         self.p = (0.0 + px, 0.0 + py, 0.0 + pz)
-           
-    
- 
+
     def move(self, dt):
-        """ "moves the particle by one time increment dt by using its current momentum and
+        """moves the particle by one time increment dt by using its current momentum and
              mass values to update its position to a new value" (wise words of Dr.Dressel)
 
              when momentum is multiplied by time it results in position
 
             Unit value expected is meters
         """
-        self.dt = dt
+        self.dt = (dt)
 
         self.r = (self.p)*(self.dt)
 
 class ChargedParticle(Particle):
-            """ ChargedParticle is a subclass of the class Particle
-                Attribute
-                ----------
-                c : charge in units [q] coulumbs
-            """
-            charge = constants.elementary_charge
-
-            def __init__(self, charge):
-
-                self.c = charge
+    """ ChargedParticle is a subclass of the class Particle
+         Attribute
+         ----------
+         c : charge in units [q] coulumbs
+    """
+    def __init__(self,x,y,z,c):
+        super(Particle,self).__init__(x,y,z)
+        self.c = charge
 
 
-class Eletron(ChargedParticle):
-                    """ Electron is a subclass of ChargedParticle
-                        Attribute
-                        ----------
-                        e : electron has mass [m_e] = and charge = 
-                    """
-                    def __init__(self, charge, mass):
-                        self.charge = charge
-                        self.m = constants.m_e
+class Electron(ChargedParticle):
+    """ Electron is a subclass of ChargedParticle
+        Attribute
+        ----------
+        e : electron has mass [m_e] = and charge = 
+     """
+    def __init__(self,x,y,z):
+        super(ChargedParticle,self).__init__(x,y,z)
+        self.e = -constants.e
+        self.m = constants.m_e
 
 class Proton(ChargedParticle):
-                    """ Proton is a subclass of ChargedParticle
-                        Attribute
-                        ----------
-                        p : proton has mass [m_p] = and charge = 
-                    """
-                    def __init__(self, charge, mass):
-                        self.m = sc.constants.m_p
-                        self.charge = charge
-
-
-
-
-
+    """ Proton is a subclass of ChargedParticle
+        Attribute
+        ----------
+        p : proton has mass [m_p] = and charge = 
+    """
+    def __init__(self,x,y,z):
+        super(ChargedParticle,self).__init__(x,y,z)
+        self.e = constants.e 
+        self.m = constants.m_p
